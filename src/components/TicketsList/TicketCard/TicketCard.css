@@ -1,0 +1,68 @@
+.ticket_card {
+  display: flex;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.ticket_bay {
+  text-align: center;
+  flex: 0 0 40%;
+  padding: 20px;
+  border-right: 1px solid #000;
+}
+
+.bay_logo {
+  width: 80%;
+}
+
+.bay_btn {
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.ticket_info {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 60%;
+}
+
+.time {
+  font-size: 30px;
+}
+
+.place {
+  font-size: 16px;
+  margin: 6px 0 4px;
+}
+
+.date {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ccc;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.stops {
+  position: relative;
+  display: block;
+}
+
+.stops img {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 140px;
+  transform: translateX(-20%);
+}
