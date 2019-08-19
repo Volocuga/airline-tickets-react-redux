@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { convertStops } from "../../../helpers/helpers";
+import { getStopTitle } from "../../../helpers/helpers";
 import "../StopsBlock/StopsBlock.css";
 
 class Checkbox extends Component {
   static propTypes = {
-    stopsFilter: PropTypes.func.isRequired,
-    stops: PropTypes.object.isRequired,
+    showOneStop: PropTypes.func.isRequired,
+    showOneMoreStop: PropTypes.func.isRequired,
     field: PropTypes.string.isRequired,
     checked: PropTypes.bool.isRequired
   };
@@ -15,13 +15,13 @@ class Checkbox extends Component {
   state = { isVisibleHoverBtn: false };
 
   handleOneMoreStop = ({ target: { name, checked } }) => {
-    const { stopsFilter, stops } = this.props;
-    stopsFilter(name, checked, stops);
+    const { showOneMoreStop } = this.props;
+    showOneMoreStop(name, checked);
   };
 
   handleOnlyOneStop = ({ target: { name } }) => {
-    const { stopsFilter } = this.props;
-    stopsFilter(name, "only");
+    const { showOneStop } = this.props;
+    showOneStop(name);
   };
 
   handleMouseEnter = () => {
@@ -51,7 +51,7 @@ class Checkbox extends Component {
 
         <span className="checkbox_checked" />
 
-        {convertStops(field)}
+        {getStopTitle(field)}
         {isVisibleHoverBtn && (
           <button name={field} onClick={this.handleOnlyOneStop}>
             Тільки

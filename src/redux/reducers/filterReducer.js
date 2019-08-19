@@ -2,13 +2,12 @@ import {
   FILTER_ONLY_ONE_STOP,
   FILTER_SET_ACTIVE_CURRENCY,
   FILTER_ONE_MORE_STOP,
-  FILTER_SHOW_ALL_STOPS
+  FILTER_SHOW_ALL_STOPS,
+  DEFAULT_CURRENCY
 } from "../constants";
 
-const allStopsFalse = { 0: false, 1: false, 2: false, 3: false };
-
 const initialState = {
-  activeCurrency: "RUB",
+  activeCurrency: DEFAULT_CURRENCY,
   stops: { 0: true, 1: true, 2: true, 3: true },
   showAll: true
 };
@@ -26,14 +25,16 @@ const filterReducer = (state = initialState, { type, payload }) => {
       };
 
     case FILTER_ONLY_ONE_STOP:
+      const stopsFalse = {};
+      Object.keys(initialState.stops).forEach(key => (stopsFalse[key] = false));
       return {
         ...state,
-        stops: { ...allStopsFalse, [payload]: true },
+        stops: { ...stopsFalse, [payload]: true },
         showAll: false
       };
 
     case FILTER_SHOW_ALL_STOPS:
-      return { ...state, showAll: payload, stops: initialState.stops };
+      return { ...state, showAll: true, stops: initialState.stops };
 
     default:
       return state;

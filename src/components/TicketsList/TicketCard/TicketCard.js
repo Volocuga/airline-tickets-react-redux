@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { convertPrice, convertStops } from "../../../helpers/helpers";
-import Logo from "../../../assets/img/bay_logo .png";
+import { convertToRealPrice, getStopTitle } from "../../../helpers/helpers";
+import Logo from "../../../assets/img/bay_logo.png";
 import Plane from "../../../assets/img/plane_icon.svg";
 import "./TicketCard.css";
 
 const TicketCard = ({
   currency,
-  rate,
+  currencyRate,
   ticket: {
     arrival_date,
     arrival_time,
@@ -27,7 +27,7 @@ const TicketCard = ({
       <img className="bay_logo" src={Logo} alt="" />
       <button className="bay_btn">
         Купити
-        <br /> за {convertPrice(price, rate, currency)}
+        <br /> за {convertToRealPrice(price, currencyRate, currency)}
       </button>
     </div>
 
@@ -41,7 +41,7 @@ const TicketCard = ({
       </div>
 
       <span className="stops">
-        {convertStops(stops)}
+        {getStopTitle(stops)}
         <img src={Plane} alt="" />
       </span>
 
@@ -57,7 +57,7 @@ const TicketCard = ({
 );
 
 TicketCard.propTypes = {
-  rate: PropTypes.number.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   ticket: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired
 };

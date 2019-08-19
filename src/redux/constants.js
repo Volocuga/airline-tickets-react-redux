@@ -1,3 +1,6 @@
+export const DEFAULT_CURRENCY = "RUB";
+export const CURRENCY_API = "https://api.exchangeratesapi.io";
+
 export const GET_TICKETS = "GET_TICKETS";
 export const GET_CURRENCY_RATE = "GET_CURRENCY_RATE";
 export const INITIALIZE_ERROR = "INITIALIZE_ERROR";

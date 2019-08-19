@@ -2,17 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { sortAndFilter } from "../../helpers/helpers";
+import { filterByStops } from "../../helpers/helpers";
 import TicketCard from "./TicketCard/TicketCard";
 import "./TicketList.css";
 
 const TicketList = ({ tickets, stops, rate, currency }) => {
   if (!tickets.length) return null;
-
   return (
     <main className="ticket_list">
-      {sortAndFilter(tickets, stops).map((ticket, i) => (
-        <TicketCard key={i} ticket={ticket} rate={rate} currency={currency} />
+      {filterByStops(tickets, stops).map((ticket, i) => (
+        <TicketCard
+          key={i}
+          ticket={ticket}
+          currencyRate={rate}
+          currency={currency}
+        />
       ))}
     </main>
   );

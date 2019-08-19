@@ -3,7 +3,7 @@
 
  - git clone https://github.com/Volocuga/airline-tickets-react-redux.git
  
- - cd contact-book
+ - cd airline-tickets-react-redux
  
  - yarn install
  

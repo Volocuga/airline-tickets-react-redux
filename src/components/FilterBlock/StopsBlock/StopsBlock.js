@@ -2,13 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { stopsFilterAction } from "../../../redux/actions/filterAction";
+import {
+  showOneMoreStopAction,
+  showOneStopAction,
+  showAllStopsAction
+} from "../../../redux/actions/filterAction";
 import Checkbox from "../Checkbox/Checkbox";
 import "../Checkbox/Checkbox.css";
 
-const StopsBlock = ({ stops, showAll, stopsFilter }) => {
-  const handleChange = ({ target: { name, checked } }) => {
-    stopsFilter(name, checked);
+const StopsBlock = ({
+  stops,
+  showAll,
+  showOneMoreStop,
+  showOneStop,
+  showAllStops
+}) => {
+  const handleShowAllStops = ({ target: { checked } }) => {
+    showAllStops(checked);
   };
 
   return (
@@ -19,7 +29,7 @@ const StopsBlock = ({ stops, showAll, stopsFilter }) => {
         <input
           type="checkbox"
           name="all"
-          onChange={handleChange}
+          onChange={handleShowAllStops}
           checked={showAll}
           disabled={showAll}
         />
@@ -32,8 +42,8 @@ const StopsBlock = ({ stops, showAll, stopsFilter }) => {
           key={field}
           field={field}
           checked={stops[field]}
-          stops={stops}
-          stopsFilter={stopsFilter}
+          showOneMoreStop={showOneMoreStop}
+          showOneStop={showOneStop}
         />
       ))}
     </>
@@ -41,17 +51,23 @@ const StopsBlock = ({ stops, showAll, stopsFilter }) => {
 };
 
 StopsBlock.propTypes = {
-  stops: PropTypes.object.isRequired,
   showAll: PropTypes.bool.isRequired,
-  stopsFilter: PropTypes.func.isRequired
+  stops: PropTypes.object.isRequired,
+  showOneMoreStop: PropTypes.func.isRequired,
+  showOneStop: PropTypes.func.isRequired,
+  showAllStops: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ filters: { stops, showAll } }) => ({
-  stops,
-  showAll
+const mapStateToProps = ({ filters: { showAll, stops } }) => ({
+  showAll,
+  stops
 });
 
-const mapDispatchToProps = { stopsFilter: stopsFilterAction };
+const mapDispatchToProps = {
+  showOneMoreStop: showOneMoreStopAction,
+  showOneStop: showOneStopAction,
+  showAllStops: showAllStopsAction
+};
 
 export default connect(
   mapStateToProps,

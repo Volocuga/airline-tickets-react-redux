@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { initializeStateAction } from "../redux/actions/initializeAction";
+import { loadDataAction } from "../redux/actions/loadDataAction";
 import FilterBlock from "./FilterBlock/FilterBlock";
 import TicketList from "./TicketsList/TicketList";
 import Logo from "../assets/img/logo.svg";
 import "./App.css";
 
 class App extends Component {
-  state = {};
-
   componentDidMount() {
-    const { initializeState } = this.props;
-    initializeState();
+    const { loadData } = this.props;
+    loadData();
   }
 
   render() {
@@ -30,10 +28,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-  initializeState: PropTypes.func.isRequired
+  loadData: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = { initializeState: initializeStateAction };
+const mapDispatchToProps = {
+  loadData: loadDataAction
+};
 
 export default connect(
   null,

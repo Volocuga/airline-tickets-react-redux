@@ -1,30 +1,21 @@
-export const sortAndFilter = (array, stopsObj) => {
-  return array
-    .filter(({ stops }) => stopsObj[stops])
-    .sort(({ price: prevPrice }, { price }) => prevPrice - price);
+const currencySymbols = { RUB: "\u20BD", USD: "\x24", EUR: "\u20AC" };
+const stopsTitle = {
+  0: "Без пересадок",
+  1: "1 пересадка",
+  2: "2 пересадки",
+  3: "3 пересадки"
 };
 
-export const convertStops = stop => {
-  switch (+stop) {
-    case 0:
-      return "Без пересадок";
-    case 1:
-      return "1 пересадка";
-    case 2:
-      return "2 пересадки";
-    case 3:
-      return "3 пересадки";
-    default:
-      return `${stop} пересадок`;
+export const filterByStops = (tickets, stopsList, orderBy = "price") => {
+  let filteredData = tickets.filter(({ stops }) => stopsList[stops]);
+
+  if (orderBy === "price") {
+    filteredData.sort(({ price: prevPrice }, { price }) => prevPrice - price);
   }
+  return filteredData;
 };
 
-export const convertPrice = (price, rate, currency) => {
-  let activeCurrency = null;
+export const getStopTitle = stop => stopsTitle[stop];
 
-  if (currency === "RUB") activeCurrency = "\u20BD";
-  if (currency === "USD") activeCurrency = "\x24";
-  if (currency === "EUR") activeCurrency = "\u20AC";
-
-  return `${(price * rate).toFixed()} ${activeCurrency} `;
-};
+export const convertToRealPrice = (price, rate, currency) =>
+  `${(price * rate).toFixed()} ${currencySymbols[currency]} `;
